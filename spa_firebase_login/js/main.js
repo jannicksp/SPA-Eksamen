@@ -12,6 +12,17 @@
 
 
               }
+
+              document.getElementById("newappear").onclick = function() {
+                let addinput = document.getElementById("new");
+            if (addinput.style.display === "none") {
+              addinput.style.display = "block";
+            } else {
+              addinput.style.display = "none";
+            }
+
+
+                     }
               function myFunction(x) {
   x.classList.toggle("change");
 }

@@ -39,7 +39,8 @@
     </header>
     <input id="search" type="search" placeholder="Search" onkeyup="search(this.value)">
     <section id="content" class="grid-container"></section>
-    <h2>Tilføj Ny Film</h2>
+    <h2 id="newappear" onclick="showNew">Tilføj Ny Film</h2>
+    <form id="new">
     <input type="text" id="name" placeholder="Film Navn/Årstal" required>
     <input type="email" id="mail" placeholder="Giv en beskrivelse fra 1-10" required>
     <input type="alder" id="alder" placeholder="Film Beskrivelse" required>
@@ -80,7 +81,7 @@
   <section id="profile" class="page">
     <header class="topbar">
       <h2>Profile</h2>
-      
+
       <a class="right" href="#" onclick="logout()">Logout</a>
     </header>
 
