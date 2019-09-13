@@ -18,7 +18,7 @@ function hideAllPages() {
     page.style.display = "none";
   }
 }
-
+ 
 // show page or tab
 function showPage(pageId) {
   hideAllPages();
