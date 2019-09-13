@@ -1,13 +1,15 @@
 "use strict";
 //search hide
-document.getElementById("searchdissapear").onclick = function() {
 
-           document.getElementById("search").style.display = "none";
 
-       }
        document.getElementById("searchappear").onclick = function() {
+         let searchinput = document.getElementById("search");
+     if (searchinput.style.display === "none") {
+       searchinput.style.display = "block";
+     } else {
+       searchinput.style.display = "none";
+     }
 
-                  document.getElementById("search").style.display = "block";
 
               }
 
@@ -18,7 +20,7 @@ function hideAllPages() {
     page.style.display = "none";
   }
 }
- 
+
 // show page or tab
 function showPage(pageId) {
   hideAllPages();
