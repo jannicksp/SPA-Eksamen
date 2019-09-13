@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Wetch Movie App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Get started with HTML, CSS and JavaScript">
+  <meta name="author" content="Rasmus Cederdorff">
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+</head>
+
+<body>
+  <!-- tabbar navigation -->
+  <nav id="tabbar" class="tabbar hide">
+    <a href="#home" onclick="showPage('home')">  Mine Film<!-- <img src="/spa_firebase_login/img/man-icon.png">--></a>
+    <a href="#about" onclick="showPage('about')">Feed</a>
+    <a href="#clients" onclick="showPage('clients')">Venner</a>
+    <a href="#profile" onclick="showPage('profile')">Profil</a>
+  </nav>
+
+  <!-- pages -->
+  <!-- home page -->
+  <section id="home" class="page">
+    <header class="topbar">
+      <div id="flexmenu">
+      <h2 id="searchdissapear" onclick="showSearch">Wetch</h2>
+      <h2 id="searchappear" onclick="showSearch">Søg</h2>
+    </div>
+
+    </header>
+    <input id="search" type="search" placeholder="Search" onkeyup="search(this.value)">
+    <section id="content" class="grid-container"></section>
+    <h2>Tilføj Ny Film</h2>
+    <input type="text" id="name" placeholder="Film Navn/Årstal" required>
+    <input type="email" id="mail" placeholder="Giv en beskrivelse fra 1-10" required>
+    <input type="alder" id="alder" placeholder="Film Beskrivelse" required>
+    <input type="køn" id="køn" placeholder="Film genre" required>
+    <input type="pic" id="pic" placeholder="Skriv din billede Url" required>
+    <button type="button" name="button" onclick="createUser()">Opret Film</button>
+  </form>
+  <form>
+    <h2>Opdater Film</h2>
+    <input type="text" id="name-update" required>
+    <input type="email" id="mail-update" required>
+    <button type="button" name="button" onclick="updateUser()">Opdater Film</button>
+  </form>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-app.js"></script>
+  <!-- Firebase Firestore (database) JS SDK -->
+  <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-firestore.js"></script>
+
+  </section>
+
+  <!-- about page -->
+  <section id="about" class="page">
+    <header class="topbar">
+      <h2>About</h2>
+    </header>
+    <p>This is my about page</p>
+  </section>
+
+  <!-- clients page -->
+  <section id="clients" class="page">
+    <header class="topbar">
+      <h2>Clients</h2>
+    </header>
+    <p>Hmm, there should be some clients right here...</p>
+  </section>
+
+  <!-- contact page -->
+  <section id="profile" class="page">
+    <header class="topbar">
+      <h2>Profile</h2>
+      <a class="right" href="#" onclick="logout()">Logout</a>
+    </header>
+
+  </section>
+
+  <section id="login" class="page">
+    <header class="topbar">
+      <h2>Login</h2>
+    </header>
+    <!-- firebase auth container  -->
+    <section id="firebaseui-auth-container"></section>
+  </section>
+
+  <!-- loader  -->
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-firestore.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <!-- main js file -->
+  <script src="js/main.js"></script>
+</body>
+
+</html>
