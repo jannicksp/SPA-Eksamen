@@ -12,6 +12,9 @@
 
 
               }
+              function myFunction(x) {
+  x.classList.toggle("change");
+}
 
 // hide all pages
 function hideAllPages() {
