@@ -64,7 +64,7 @@
   <!-- about page -->
   <section id="about" class="page">
     <header class="topbar">
-      <h2>About</h2>
+      <h2>Feed</h2>
     </header>
     <p>This is my about page</p>
   </section>
@@ -77,21 +77,24 @@
     <p>Hmm, there should be some clients right here...</p>
   </section>
 
-  <!-- contact page -->
+  <!-- profile page -->
   <section id="profile" class="page">
     <header class="topbar">
       <h2>Profile</h2>
-
       <a class="right" href="#" onclick="logout()">Logout</a>
     </header>
     <div id="profilefoto"></div>
-    <input type="profilpicture" id="profilepic" placeholder="Type your mail" required>
-  </section>
+            <input type="file" id="profile_foto" placeholder="vælg profilbillede">
+            <article>
+              <h3>Burhan Tahmasabi</h3>
+              <h5>Aarhus, DK</h5>
+              <p>Hi! My name is Burhan, I’m a creative geek from Aarhus, DK. I enjoy creating eye candy solutions for web and mobile apps. In my freetime i love to watch movies. HMU with a good movie. </p>
+            </article>
+
 
   <section id="login" class="page">
     <header class="topbar">
       <h2>Login</h2>
-    </header>
     <!-- firebase auth container  -->
     <section id="firebaseui-auth-container"></section>
   </section>

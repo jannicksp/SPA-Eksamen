@@ -305,6 +305,18 @@ input {
 
 }
 
+h5, h3 {
+margin-right: 75%;
+}
+
+p{
+  margin-left: 3%;
+  text-align: left;
+  line-height: 1.5em;
+}
+
+
+
 @media (min-width: 600px) {
   .grid-container {
     grid-template-columns: 50% 50%;
