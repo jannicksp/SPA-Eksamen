@@ -1,5 +1,5 @@
 "use strict";
-//search hide
+//search hide Jannick
 
 
        document.getElementById("searchappear").onclick = function() {
@@ -10,6 +10,7 @@
        searchinput.style.display = "none";
      }
 
+//add movie Jannick
 
               }
 
@@ -77,7 +78,7 @@ function showLoader(show) {
 
 // ========== Firebase sign in functionality ========== //
 
-// Your web app's Firebase configuration
+// Your web app's Firebase configuration Jannick
 const firebaseConfig = {
   apiKey: "AIzaSyDm7ySbgFhwYhs_n__ZfIsRmlJpIsn5TFk",
   authDomain: "spa-webapp.firebaseapp.com",
@@ -100,7 +101,7 @@ users = snapshotData.docs;
   appendUsers(users);
 });
 
-// append users to the DOM
+// append users to the DOM Jannick
 function appendUsers(users) {
   let htmlTemplate = "";
   for (let user of users) {
@@ -122,7 +123,7 @@ function appendUsers(users) {
 }
 
 // ========== CREATE ==========
-// add a new user to firestore (database)
+// add a new user to firestore (database) Jannick
 function createUser() {
   // references to the inoput fields
   let nameInput = document.querySelector('#name');
@@ -151,7 +152,7 @@ function createUser() {
 // ========== UPDATE ==========
 
 function selectUser(id, name, mail) {
-  // references to the input fields
+  // references to the input fields Jannick
   let nameInput = document.querySelector('#name-update');
   let mailInput = document.querySelector('#mail-update');
   nameInput.value = name;
@@ -218,7 +219,7 @@ function appendUserData(user) {
   `;
 }
 
-// search functionality
+// search functionality Jannick
 function search(value) {
   let searchQuery = value.toLowerCase();
   let filteredUsers = [];
