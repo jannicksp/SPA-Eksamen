@@ -26,6 +26,30 @@ body {
   display: flex;
   justify-content: space-between;
 }
+/*  burgermenu*/
+.container {
+  display: inline-block;
+  cursor: pointer;
+}
+.bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 2px;
+  background-color: white;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}
 h1 {
   font-size: 2em;
   font-weight: 300;
@@ -261,6 +285,25 @@ input {
   grid-template-columns: 100%;
   padding: 10px;
 }
+/*profilnavn*/
+#login{
+
+}
+
+/*profilpic*/
+
+#profilefoto{
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  background-image: url("../img/profilbillede.JPG");
+  background-size: cover;
+  margin-left: auto;
+  margin-right: auto;
+
+  transform: rotate(360deg);
+
+}
 
 @media (min-width: 600px) {
   .grid-container {
@@ -302,3 +345,5 @@ article h1,h2,h3,h4,p{
 p .wetch {
   width: 500px;
 }
+
+/*
