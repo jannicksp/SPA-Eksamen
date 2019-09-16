@@ -10,15 +10,16 @@
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
   <link rel="stylesheet" href="css/main.css">
   <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
   <!-- tabbar navigation -->
   <nav id="tabbar" class="tabbar hide">
-    <a href="#home" onclick="showPage('home')">  Mine Film<!-- <img src="/spa_firebase_login/img/man-icon.png">--></a>
+    <a class="fa fa-fw fa-home" href="#home" onclick="showPage('home')"> <!-- <img src="/spa_firebase_login/img/man-icon.png">--></a>
     <a href="#about" onclick="showPage('about')">Feed</a>
     <a href="#clients" onclick="showPage('clients')">Venner</a>
-    <a href="#profile" onclick="showPage('profile')">Profil</a>
+    <a class="fa fa-fw fa-user" href="#profile" onclick="showPage('profile')"></a>
   </nav>
 
   <!-- pages -->
@@ -26,14 +27,20 @@
   <section id="home" class="page">
     <header class="topbar">
       <div id="flexmenu">
+        <div class="container" onclick="myFunction(this)">
+  <div class="bar1"></div>
+  <div class="bar2"></div>
+  <div class="bar3"></div>
+</div>
       <h2>Wetch</h2>
-      <h2 id="searchappear" onclick="showSearch">Søg</h2>
+      <h2 class="fa fa-fw fa-search" id="searchappear" onclick="showSearch"></h2>
     </div>
 
     </header>
     <input id="search" type="search" placeholder="Search" onkeyup="search(this.value)">
     <section id="content" class="grid-container"></section>
-    <h2>Tilføj Ny Film</h2>
+    <h2 id="newappear" onclick="showNew">Tilføj Ny Film</h2>
+    <form id="new">
     <input type="text" id="name" placeholder="Film Navn/Årstal" required>
     <input type="email" id="mail" placeholder="Giv en beskrivelse fra 1-10" required>
     <input type="alder" id="alder" placeholder="Film Beskrivelse" required>
@@ -74,6 +81,7 @@
   <section id="profile" class="page">
     <header class="topbar">
       <h2>Profile</h2>
+
       <a class="right" href="#" onclick="logout()">Logout</a>
     </header>
     <div id="profilefoto"></div>
