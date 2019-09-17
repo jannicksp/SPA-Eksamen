@@ -121,7 +121,7 @@ h1 {
 
 /* Add a color to the active/current link */
 .tabbar a.active {
-  background-color:black;
+background-image: url("../img/black-texture-background.jpg");
   color: var(--text-color-light);
 }
 
@@ -361,16 +361,7 @@ p .wetch {
 .grid-item img{
   width: 30%;
 }
-/*
-#addMovieButton {
-  color: white;
-  font-weight: bold;
-  background-color: orange;
-  padding: 1%;
-  margin: 2%;
 
-}
-*/
 
 #addMovieButton {
   margin: 3% 0 7% 0;
@@ -381,6 +372,6 @@ p .wetch {
   padding: 10px 8px;
   border-radius: 0;
   color: White;
-  background-color: #e8aa26;
+  background-image: url("../img/black-texture-background.jpg");
   width: 40%;
 }
