@@ -337,6 +337,11 @@ article{
 
 
 }
+
+article h2 {
+  font-family: 'Libre Franklin', sans-serif;
+}
+
 article h1,h2,h3,h4,p{
   color: white;
 
