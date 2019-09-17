@@ -124,7 +124,8 @@ h1 {
 background-image: url("../img/black-texture-background.jpg");
   color: var(--text-color-light);
 }
-
+/*plusmoviebutton*/
+#newappear
 /* ---------- page styling ---------- */
 .page {
   display: none;
