@@ -22,10 +22,16 @@
               addinput.style.display = "none";
             }
 
-
+// burgermenu med animation jannick
                      }
-              function myFunction(x) {
+              function myBurger(x) {
   x.classList.toggle("change");
+}
+// sort function Jannick
+
+function sortMovies() {
+  movies.sort();
+  document.getElementById("demo").innerHTML = movies;
 }
 
 // hide all pages
@@ -179,7 +185,6 @@ function updateMovie() {
   movieRef.doc(selectedMovieId).set(movieToUpdate);
 }
 unødig funktion*/
-
 // ========== DELETE ==========
 function deleteMovie(id) {
   console.log(id);
