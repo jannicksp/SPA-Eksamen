@@ -113,15 +113,15 @@
       <a class="right" href="#" onclick="logout()">Logout</a>
     </header>
     <form>
+      <label>Profile Image</label>
+      <input type="file" id="img" accept="image/*" onchange="previewImage(this.files[0], 'imagePreview')">
+      <img id="imagePreview" class="image-preview" src="/img/pic-placeholder.png" alt="imagePreview">
          <label for="name">Name</label>
          <input type="text" id="name" placeholder="Type your name" required>
          <label for="mail">Mail</label>
          <input type="email" id="mail" placeholder="Type your mail" required>
          <label for="birthdate">Birthdate</label>
-         <input type="text" id="birthdate" placeholder="Type your birthdate" required>
-         <label>Profile Image</label>
-         <input type="file" id="img" accept="image/*" onchange="previewImage(this.files[0], 'imagePreview')">
-         <img id="imagePreview" class="image-preview" src="/img/pic-placeholder.png" alt="imagePreview">
+         <input type="text" id="birthdate" placeholder="Type your birthdate" required> 
          <button type="button" name="button" onclick="updateUser()">Save</button>
        </form>
   </section>
