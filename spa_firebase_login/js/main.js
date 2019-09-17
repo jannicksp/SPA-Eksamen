@@ -253,7 +253,7 @@ function search(value) {
     }
   }
   console.log(filteredMovies);
-  appendUsers(filteredMovies);
+  appendMovies(filteredMovies);
 }
 
 
