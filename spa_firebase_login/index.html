@@ -119,9 +119,9 @@
          <input type="email" id="mail" placeholder="Type your mail" required>
          <label for="birthdate">Birthdate</label>
          <input type="text" id="birthdate" placeholder="Type your birthdate" required>
-         <label for="hairColor">Profile Image</label>
+         <label>Profile Image</label>
          <input type="file" id="img" accept="image/*" onchange="previewImage(this.files[0], 'imagePreview')">
-         <img id="imagePreview" class="image-preview">
+         <img id="imagePreview" class="image-preview" src="/img/pic-placeholder.png" alt="imagePreview">
          <button type="button" name="button" onclick="updateUser()">Save</button>
        </form>
   </section>
