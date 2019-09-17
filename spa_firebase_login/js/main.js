@@ -115,7 +115,6 @@ function appendUsers(users) {
       <h4>${user.data().moviePlot}</h4>
       <p>Your Rating:  ${user.data().yourRating} &#9733;</p>
       <p>IMDB Rating:  ${user.data().movieRating} &#9733;</p>
-      <button onclick="selectUser('${user.id}','${user.data().movieName}', '${user.data().movieRating}')">Update</button>
       <button onclick="deleteUser('${user.id}')">Delete</button>
     </article>
     `;
@@ -179,7 +178,7 @@ function updateUser() {
   };
   userRef.doc(selectedUserId).set(userToUpdate);
 }
-unødig funktion*/
+unødig funktion*/ 
 // ========== DELETE ==========
 function deleteUser(id) {
   console.log(id);
@@ -240,7 +239,13 @@ function search(value) {
   }
   console.log(filteredUsers);
   appendUsers(filteredUsers);
+}
 
+// rederigere tekst
+var el = document.getElementById('txt');
+el.ondblclick = function(){
+  this.removeAttribute('readonly');
+};
 
 /* Searchfunction to search in the OMDB api and show movieresults */
 
