@@ -255,7 +255,6 @@ function appendUserData() {
     console.log(userData);
     if (userData) {
       document.querySelector('#birthdate').value = userData.birthdate;
-      document.querySelector('#hairColor').value = userData.hairColor;
       document.querySelector('#imagePreview').src = userData.img;
     }
   });
@@ -273,8 +272,7 @@ function updateUser() {
   // update database user
   userRef.doc(currentUser.uid).set({
     img: document.querySelector('#imagePreview').src,
-    birthdate: document.querySelector('#birthdate').value,
-    hairColor: document.querySelector('#hairColor').value
+    birthdate: document.querySelector('#birthdate').value
   }, {
     merge: true
   });
