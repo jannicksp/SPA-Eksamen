@@ -334,28 +334,33 @@ function appendMovieInfo(MovieInfo) {
 
 }
 
-/* Feed */
-
+/* Feed and firestore database for feed */
+const movieFeedRef = db.collection("movieFeedStorage");
 let moviesFeed = [];
 
-console.log(moviesFeed);
+// watch the database ref for changes
+movieFeedRef.onSnapshot(function(snapshotData) {
+  moviesFeed = snapshotData.docs;
+  appendMoviesFeed(moviesFeed);
+});
 
 function appendMoviesFeed(moviesFeed) {
+  let htmlTemplate = "";
   for (let movieFeed of moviesFeed) {
     console.log(movieFeed);
-    document.querySelector("#grid-teachers").innerHTML += `
+    htmlTemplate += `
+    <p id="haveWatched">${currentUser.displayName} has recently watched:</p>
       <article id="movieFeedBox">
-        <img id="left" src='${movieFeed.movieImg}'>
-        <h3 class="right">${movieFeed.movieName}</h3>
-        <p class="right"> Your Rating:  ${movieFeed.yourRating} &#9733;</p>
-        <p class="right">IMDB Rating:  ${movieFeed.movieRating} &#9733;</p>
+        <img id="left" src='${movieFeed.data().movieImg}'>
+        <h3 class="right">${movieFeed.data().movieName}</h3>
+        <p class="right"> Your Rating:  ${movieFeed.data().yourRating} &#9733;</p>
+        <p class="right"> IMDB Rating:  ${movieFeed.data().movieRating} &#9733;</p>
       </article>
     `;
 
   }
+  document.querySelector('#feedContent').innerHTML = htmlTemplate;
 }
-
-appendMoviesFeed(moviesFeed);
 
 function createMovieFeed() {
   // get the values from the input fields
@@ -373,12 +378,7 @@ function createMovieFeed() {
   };
 
   // push the new object to the array
-  moviesFeed.push(newmoviefeed);
-
-  // reset grid
-  document.querySelector("#grid-teachers").innerHTML = "";
-  // call appendTeachers to append all teachers again
-  appendMoviesFeed(moviesFeed);
+  movieFeedRef.add(newmoviefeed);
   // To reset the "yourRating" input field
   document.querySelector("#yourRating").value = "";
 }
