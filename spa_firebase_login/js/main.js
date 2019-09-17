@@ -22,25 +22,10 @@
               addinput.style.display = "none";
             }
 
-// burgermenu med animation jannick
+
                      }
-              function myBurger(x) {
+              function myFunction(x) {
   x.classList.toggle("change");
-}
-// sort function Jannick
-function compare( a, b ) {
-  if ( a.data().movieName < b.data().movieName ){
-    return -1;
-  }
-  if ( a.data().movieName > b.data().movieName ){
-    return 1;
-  }
-  return 0;
-}
-function sortMovies() {
-  movies=movies.sort(compare)
-console.log(movies);
-  appendMovies(movies.sort(compare));
 }
 
 // hide all pages
@@ -105,32 +90,32 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-
 const db = firebase.firestore();
-const movieRef = db.collection("movies");
-let movies =[];
+const userRef = db.collection("Users");
+let users =[];
+let currentUser;
 
 // watch the database ref for changes
-movieRef.onSnapshot(function(snapshotData) {
-movies = snapshotData.docs;
-  appendMovies(movies);
+userRef.onSnapshot(function(snapshotData) {
+users = snapshotData.docs;
+  appendUsers(users);
 });
 
-// append movies to the DOM Jannick
-function appendMovies(movies) {
+// append users to the DOM Jannick
+function appendUsers(users) {
   let htmlTemplate = "";
-  for (let movie of movies) {
-    console.log(movie.id);
-    console.log(movie.data().movieName);
+  for (let user of users) {
+    console.log(user.id);
+    console.log(user.data().movieName);
     htmlTemplate += `
     <article>
-      <h2>${movie.data().movieName}</h2>
-      <img src="${movie.data().movieImg}">
-      <h3>${movie.data().movieGenre}</h3>
-      <h4>${movie.data().moviePlot}</h4>
-      <p>Your Rating:  ${movie.data().yourRating} &#9733;</p>
-      <p>IMDB Rating:  ${movie.data().movieRating} &#9733;</p>
-      <button onclick="deleteMovie('${movie.id}')">Delete</button>
+      <h2>${user.data().movieName}</h2>
+      <img src="${user.data().movieImg}">
+      <h3>${user.data().movieGenre}</h3>
+      <h4>${user.data().moviePlot}</h4>
+      <p>Your Rating:  ${user.data().yourRating} &#9733;</p>
+      <p>IMDB Rating:  ${user.data().movieRating} &#9733;</p>
+      <button onclick="deleteUser('${user.id}')">Delete</button>
     </article>
     `;
   }
@@ -139,8 +124,8 @@ function appendMovies(movies) {
 }
 
 // ========== CREATE ==========
-// add a new movie to firestore (database) Jannick
-function createMovie() {
+// add a new user to firestore (database) Jannick
+function createUser() {
   // references to the inoput fields
   let yourRatingInput = document.querySelector('#yourRating');
   let movieNameInput = document.querySelector('#movieName');
@@ -158,7 +143,7 @@ function createMovie() {
   let picInput = document.querySelector('#pic');
   */
 
-  let newMovie = {
+  let newUser = {
     yourRating: yourRatingInput.value,
     movieName: movieNameInput.value,
     movieRating: movieRatingInput.value,
@@ -167,40 +152,86 @@ function createMovie() {
     movieImg: movieImgInput.value,
   };
 
-  movieRef.add(newMovie);
+  userRef.add(newUser);
   document.querySelector("#yourRating").value = "";
 }
 
 
 /* ========== UPDATE ==========
 
-function selectMovie(id, name, mail) {
+function selectUser(id, name, mail) {
   // references to the input fields Jannick
   let nameInput = document.querySelector('#name-update');
   let mailInput = document.querySelector('#mail-update');
   nameInput.value = name;
   mailInput.value = mail;
-  selectedMovieId = id;
+  selectedUserId = id;
 }
 
-function updateMovie() {
+function updateUser() {
   let nameInput = document.querySelector('#name-update');
   let mailInput = document.querySelector('#mail-update');
 
-  let MovieToUpdate = {
+  let userToUpdate = {
     name: nameInput.value,
     mail: mailInput.value
   };
-  movieRef.doc(selectedMovieId).set(movieToUpdate);
+  userRef.doc(selectedUserId).set(userToUpdate);
 }
 unødig funktion*/
 // ========== DELETE ==========
-function deleteMovie(id) {
+function deleteUser(id) {
   console.log(id);
-  movieRef.doc(id).delete();
+  userRef.doc(id).delete();
 }
 
+// append user data to profile page
+function appendUserData() {
+  // auth user
+  document.querySelector('#name').value = currentUser.displayName;
+  document.querySelector('#mail').value = currentUser.email;
 
+  // database user
+  userRef.doc(currentUser.uid).get().then(function(doc) {
+    let userData = doc.data();
+    console.log(userData);
+    if (userData) {
+      document.querySelector('#birthdate').value = userData.birthdate;
+      document.querySelector('#hairColor').value = userData.hairColor;
+      document.querySelector('#imagePreview').src = userData.img;
+    }
+  });
+}
+
+// update user data - auth user and database object
+function updateUser() {
+  let user = firebase.auth().currentUser;
+
+  // update auth user
+  user.updateProfile({
+    displayName: document.querySelector('#name').value
+  });
+
+  // update database user
+  userRef.doc(currentUser.uid).set({
+    img: document.querySelector('#imagePreview').src,
+    birthdate: document.querySelector('#birthdate').value,
+    hairColor: document.querySelector('#hairColor').value
+  }, {
+    merge: true
+  });
+}
+
+// ========== Prieview image function ========== //
+function previewImage(file, previewId) {
+  if (file) {
+    let reader = new FileReader();
+    reader.onload = function(event) {
+      document.querySelector('#' + previewId).setAttribute('src', event.target.result);
+    };
+    reader.readAsDataURL(file);
+  }
+}
 
 // Firebase UI configuration
 const uiConfig = {
@@ -217,6 +248,7 @@ const ui = new firebaseui.auth.AuthUI(firebase.auth());
 // Listen on authentication state change
 firebase.auth().onAuthStateChanged(function(user) {
   let tabbar = document.querySelector('#tabbar');
+  currentUser=user
   console.log(user);
   if (user) { // if user exists and is authenticated
     setDefaultPage();
@@ -230,30 +262,24 @@ firebase.auth().onAuthStateChanged(function(user) {
   showLoader(false);
 });
 
+
 // sign out user
 function logout() {
   firebase.auth().signOut();
 }
 
-function appendUserData(user) {
-  document.querySelector('#profile').innerHTML += `
-    <h3>${user.displayName}</h3>
-    <p>${user.email}</p>
-  `;
-}
-
 // search functionality Jannick
 function search(value) {
   let searchQuery = value.toLowerCase();
-  let filteredMovies = [];
-  for (let movie of movies) {
-    let title = movie.data().movieName.toLowerCase();
+  let filteredUsers = [];
+  for (let user of users) {
+    let title = user.data().movieName.toLowerCase();
     if (title.includes(searchQuery)) {
-      filteredMovies.push(movie);
+      filteredUsers.push(user);
     }
   }
-  console.log(filteredMovies);
-  appendUsers(filteredMovies);
+  console.log(filteredUsers);
+  appendUsers(filteredUsers);
 }
 
 
@@ -277,12 +303,12 @@ if (value.length == 0) {
     })
     .then(function(json) {
       console.log(json.Search);
-      appendMovieList(json.Search);
+      appendProducts(json.Search);
     });
 
 }
 
-function appendMovieList(products) {
+function appendProducts(products) {
   let htmlTemplate = "";
   for (let product of products) {
     console.log(product);

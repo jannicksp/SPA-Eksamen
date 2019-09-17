@@ -29,7 +29,7 @@
   <section id="home" class="page">
     <header class="topbar">
       <div id="flexmenu">
-        <div class="container" onclick="myBurger(this)">
+        <div class="container" onclick="myFunction(this)">
   <div class="bar1"></div>
   <div class="bar2"></div>
   <div class="bar3"></div>
@@ -40,12 +40,10 @@
 
     </header>
     <input id="search" type="search" placeholder="Search" onkeyup="search(this.value)">
-    <button onclick="sortMovies()">Sorter alfabetisk</button>
-    <p id="demo"></p>
     <section id="content" class="grid-container"></section>
-    <div>
+    <div id="newappear" onclick="shownew">
     <h2>Add New Movie</h2>
-    <img id="newappear" onclick="shownew" src="img/addmovie2.png" alt="addmovie"
+    <img src="img/addmovie.png" alt="addmovie"
   </div>
 
    <!-- Place to input movie title and search for it in the OMDB API-->
@@ -61,14 +59,14 @@
     <input type="text" id="moviePlot" placeholder="Movie Plot" required>
     <input type="text" id="movieGenre" placeholder="Movie genre" required>
     <input type="text" id="movieImg" placeholder="Image URL" required>
-    <button type="button" id="addMovieButton" name="button" onclick="createMovie()">Add Movie</button>
+    <button type="button" id="addMovieButton" name="button" onclick="createUser()">Add Movie</button>
   </form>
   <!--Opdater Film Jannick
   <form>
     <h2>Opdater Film</h2>
     <input type="text" id="name-update" required>
     <input type="email" id="mail-update" required>
-    <button type="button" name="button" onclick="updateMovie()">Opdater Film</button>
+    <button type="button" name="button" onclick="updateUser()">Opdater Film</button>
   </form>  -->
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-app.js"></script>
@@ -100,7 +98,20 @@
       <h2>Profile</h2>
       <a class="right" href="#" onclick="logout()">Logout</a>
     </header>
-
+    <form>
+     <label for="name">Name</label>
+     <input type="text" id="name" placeholder="Type your name" required>
+     <label for="mail">Mail</label>
+     <input type="email" id="mail" placeholder="Type your mail" required>
+     <label for="birthdate">Birthdate</label>
+     <input type="text" id="birthdate" placeholder="Type your birthdate" required>
+     <label for="hairColor">Hair Color</label>
+     <input type="text" id="hairColor" placeholder="Type your hair color" required>
+     <label for="hairColor">Profile Image</label>
+     <input type="file" id="img" accept="image/*" onchange="previewImage(this.files[0], 'imagePreview')">
+     <img id="imagePreview" class="image-preview">
+     <button type="button" name="button" onclick="updateUser()">Save</button>
+   </form>
   </section>
 
   <section id="login" class="page">
