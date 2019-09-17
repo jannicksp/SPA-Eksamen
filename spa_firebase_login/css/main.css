@@ -305,21 +305,9 @@ input {
 
 }
 
-h5, h3 {
-text-align: left;
-  margin-left: 3%;
 
-}
-h5{
-  color: #F36E21
-}
-p{
-  margin-left: 3%;
-  text-align: left;
-  line-height: 1.5em;
-}
 
-  
+
 
 
 @media (min-width: 600px) {
