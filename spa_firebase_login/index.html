@@ -41,7 +41,10 @@
     </header>
     <input id="search" type="search" placeholder="Search" onkeyup="search(this.value)">
     <section id="content" class="grid-container"></section>
-    <h2 id="newappear" onclick="shownew">Add New Movie</h2>
+    <div id="newappear" onclick="shownew">
+    <h2>Add New Movie</h2>
+    <img src="img/addmovie.png" alt="addmovie"
+  </div>
 
    <!-- Place to input movie title and search for it in the OMDB API-->
    <form id= "addMovieBox">
@@ -64,7 +67,7 @@
     <input type="text" id="name-update" required>
     <input type="email" id="mail-update" required>
     <button type="button" name="button" onclick="updateUser()">Opdater Film</button>
-  </form> -->
+  </form>  -->
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-app.js"></script>
   <!-- Firebase Firestore (database) JS SDK -->
@@ -95,22 +98,13 @@
       <h2>Profile</h2>
       <a class="right" href="#" onclick="logout()">Logout</a>
     </header>
-    <div id="profilefoto"></div>
-            <input type="file" id="profile_foto" placeholder="vælg profilbillede">
-            <input size="10" readonly="readonly" id="txt" />
-<div>
-  <h3>Burhans filmliste</h3>
 
-<img src="img_avatar.png" alt="Avatar" class="avatar">
-<img src="img_avatar2.png" alt="Avatar" class="avatar">
-<img src="img_avatar2.png" alt="Avatar" class="avatar">
-
-
-</div>
+  </section>
 
   <section id="login" class="page">
     <header class="topbar">
       <h2>Login</h2>
+    </header>
     <!-- firebase auth container  -->
     <section id="firebaseui-auth-container"></section>
   </section>
