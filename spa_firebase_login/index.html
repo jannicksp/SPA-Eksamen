@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 
 <body>
@@ -18,7 +19,7 @@
   <nav id="tabbar" class="tabbar hide">
     <a class="fa fa-fw fa-home" href="#home" onclick="showPage('home')"> <!-- <img src="/spa_firebase_login/img/man-icon.png">--></a>
     <a href="#about" onclick="showPage('about')">Feed</a>
-    <a href="#clients" onclick="showPage('clients')">Venner</a>
+    <a href="#clients" onclick="showPage('clients')">Friends</a>
     <a class="fa fa-fw fa-user" href="#profile" onclick="showPage('profile')"></a>
   </nav>
 
@@ -39,13 +40,21 @@
     </header>
     <input id="search" type="search" placeholder="Search" onkeyup="search(this.value)">
     <section id="content" class="grid-container"></section>
-    <h2>Tilføj Ny Film</h2>
-    <input type="text" id="name" placeholder="Film Navn/Årstal" required>
-    <input type="email" id="mail" placeholder="Giv en beskrivelse fra 1-10" required>
-    <input type="alder" id="alder" placeholder="Film Beskrivelse" required>
-    <input type="køn" id="køn" placeholder="Film genre" required>
-    <input type="pic" id="pic" placeholder="Skriv din billede Url" required>
-    <button type="button" name="button" onclick="createUser()">Opret Film</button>
+    <h2>Add New Movie</h2>
+
+   <!-- Place to input movie title and search for it in the OMDB API-->
+   <div id="searchresults">
+    <input id="apiSearchResults" type="search" placeholder="Search" onkeyup="apisearch(this.value)">
+    <section id="grid-products" class="grid-container2"></section>
+  </div>
+  <input type="number" id="yourRating" placeholder="Your rating from 1-10" required>
+  <br>
+    <input type="text" id="movieName" placeholder="Movie Name and Year" required>
+    <input type="text" id="movieRating" placeholder="IMDB Rating" required>
+    <input type="text" id="moviePlot" placeholder="Movie Plot" required>
+    <input type="text" id="movieGenre" placeholder="Movie genre" required>
+    <input type="text" id="movieImg" placeholder="Image URL" required>
+    <button type="button" id="addMovieButton" name="button" onclick="createUser()">Add Movie</button>
   </form>
   <form>
     <h2>Opdater Film</h2>
@@ -63,15 +72,16 @@
   <!-- about page -->
   <section id="about" class="page">
     <header class="topbar">
-      <h2>About</h2>
+      <h2>Feed</h2>
     </header>
-    <p>This is my about page</p>
+
+    </div>
   </section>
 
   <!-- clients page -->
   <section id="clients" class="page">
     <header class="topbar">
-      <h2>Clients</h2>
+      <h2>Friends</h2>
     </header>
     <p>Hmm, there should be some clients right here...</p>
   </section>
@@ -80,7 +90,7 @@
   <section id="profile" class="page">
     <header class="topbar">
       <h2>Profile</h2>
-      
+
       <a class="right" href="#" onclick="logout()">Logout</a>
     </header>
 

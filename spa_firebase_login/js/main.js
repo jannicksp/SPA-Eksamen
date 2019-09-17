@@ -94,46 +94,55 @@ function appendUsers(users) {
   let htmlTemplate = "";
   for (let user of users) {
     console.log(user.id);
-    console.log(user.data().name);
+    console.log(user.data().movieName);
     htmlTemplate += `
     <article>
-      <h2>${user.data().name}</h2>
-      <img src="${user.data().pic}">
-      <h3>${user.data().alder}</h3>
-      <h4>${user.data().køn}</h4>
-      <p>${user.data().mail}</p>
-      <button onclick="selectUser('${user.id}','${user.data().name}', '${user.data().mail}')">Update</button>
+      <h2>${user.data().movieName}</h2>
+      <img src="${user.data().movieImg}">
+      <h3>${user.data().movieGenre}</h3>
+      <h4>${user.data().moviePlot}</h4>
+      <p>Your Rating:  ${user.data().yourRating} &#9733;</p>
+      <p>IMDB Rating:  ${user.data().movieRating} &#9733;</p>
+      <button onclick="selectUser('${user.id}','${user.data().movieName}', '${user.data().movieRating}')">Update</button>
       <button onclick="deleteUser('${user.id}')">Delete</button>
     </article>
     `;
   }
   document.querySelector('#content').innerHTML = htmlTemplate;
+
 }
 
 // ========== CREATE ==========
 // add a new user to firestore (database)
 function createUser() {
   // references to the inoput fields
+  let yourRatingInput = document.querySelector('#yourRating');
+  let movieNameInput = document.querySelector('#movieName');
+  let movieRatingInput = document.querySelector('#movieRating');
+  let moviePlotInput = document.querySelector('#moviePlot');
+  let movieGenreInput = document.querySelector('#movieGenre');
+  let movieImgInput = document.querySelector('#movieImg');
+  document.querySelector("#apiSearchResults").value = "";
+
+/*
   let nameInput = document.querySelector('#name');
   let mailInput = document.querySelector('#mail');
   let kønInput = document.querySelector('#køn');
   let alderInput = document.querySelector('#alder');
   let picInput = document.querySelector('#pic');
-  console.log(nameInput.value);
-  console.log(mailInput.value);
-  console.log(kønInput.value);
-  console.log(alderInput.value);
-  console.log(picInput.value);
+  */
 
   let newUser = {
-    name: nameInput.value,
-    mail: mailInput.value,
-    køn: kønInput.value,
-    alder: alderInput.value,
-    pic: picInput.value,
+    yourRating: yourRatingInput.value,
+    movieName: movieNameInput.value,
+    movieRating: movieRatingInput.value,
+    moviePlot: moviePlotInput.value,
+    movieGenre: movieGenreInput.value,
+    movieImg: movieImgInput.value,
   };
 
   userRef.add(newUser);
+  document.querySelector("#yourRating").value = "";
 }
 
 
@@ -212,11 +221,83 @@ function search(value) {
   let searchQuery = value.toLowerCase();
   let filteredUsers = [];
   for (let user of users) {
-    let title = user.data().name.toLowerCase();
+    let title = user.data().movieName.toLowerCase();
     if (title.includes(searchQuery)) {
       filteredUsers.push(user);
     }
   }
   console.log(filteredUsers);
   appendUsers(filteredUsers);
+}
+
+/* Searchfunction to search in the OMDB api and show movieresults */
+
+function apisearch(value) {
+
+
+  let url = "http://www.omdbapi.com/?apikey=196312ed&s=" + value;
+  console.log(url);
+console.log(value);
+console.log(value.length);
+
+if (value.length == 0) {
+  document.querySelector("#grid-products").innerHTML = "";
+}
+
+  fetch(url)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(json) {
+      console.log(json.Search);
+      appendProducts(json.Search);
+    });
+
+}
+
+function appendProducts(products) {
+  let htmlTemplate = "";
+  for (let product of products) {
+    console.log(product);
+    htmlTemplate += `
+    <section class = "grid-item">
+    <a onclick="hideMovieSearch(), apisearch2('${product.Title}')">
+      <h3>${product.Title} (${product.Year})</h3>
+      <img src="${product.Poster}">
+      </a>
+    </section>
+    `;
+
+  }
+  document.querySelector("#grid-products").innerHTML = htmlTemplate;
+}
+
+function hideMovieSearch() {
+    document.querySelector("#grid-products").innerHTML = "";
+
+}
+
+function apisearch2(value) {
+  console.log(value);
+
+  let url = "http://www.omdbapi.com/?apikey=196312ed&t=" + value;
+  console.log(url);
+
+  fetch(url)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(json) {
+      console.log(json);
+      appendMovieInfo(json);
+    });
+}
+
+function appendMovieInfo(MovieInfo) {
+document.querySelector("#movieName").value = `${MovieInfo.Title} (${MovieInfo.Year})`;
+document.querySelector("#movieRating").value = `${MovieInfo.imdbRating}`;
+document.querySelector("#moviePlot").value = `${MovieInfo.Plot}`;
+document.querySelector("#movieGenre").value = `${MovieInfo.Genre}`;
+document.querySelector("#movieImg").value = `${MovieInfo.Poster}`;
+
 }
