@@ -239,7 +239,7 @@ function search(value) {
   }
   console.log(filteredUsers);
   appendUsers(filteredUsers);
-}
+
 
 /* Searchfunction to search in the OMDB api and show movieresults */
 
