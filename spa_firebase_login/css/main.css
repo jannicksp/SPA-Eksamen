@@ -285,6 +285,37 @@ input {
   grid-template-columns: 100%;
   padding: 10px;
 }
+/*profilnavn*/
+#login{
+
+}
+
+/*profilpic*/
+
+#profilefoto{
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  background-image: url("../img/profilbillede.JPG");
+  background-size: cover;
+  margin-left: auto;
+  margin-right: auto;
+
+  transform: rotate(360deg);
+
+}
+
+h5, h3 {
+margin-right: 75%;
+}
+
+p{
+  margin-left: 3%;
+  text-align: left;
+  line-height: 1.5em;
+}
+
+
 
 @media (min-width: 600px) {
   .grid-container {

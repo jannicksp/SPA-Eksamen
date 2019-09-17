@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="da">
 
 <head>
   <meta charset="utf-8">
   <title>Wetch Movie App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Get started with HTML, CSS and JavaScript">
-  <meta name="author" content="Rasmus Cederdorff">
+  <meta name="description" content="Wetch Web App">
+  <meta name="author" content="Jannick Pedersen">
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
   <link rel="stylesheet" href="css/main.css">
   <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
@@ -15,7 +15,7 @@
 </head>
 
 <body>
-  <!-- tabbar navigation -->
+  <!-- tabbar navigation Jannick-->
   <nav id="tabbar" class="tabbar hide">
     <a class="fa fa-fw fa-home" href="#home" onclick="showPage('home')"> <!-- <img src="/spa_firebase_login/img/man-icon.png">--></a>
     <a href="#about" onclick="showPage('about')">Feed</a>
@@ -25,6 +25,7 @@
 
   <!-- pages -->
   <!-- home page -->
+    <!--Jannick-->
   <section id="home" class="page">
     <header class="topbar">
       <div id="flexmenu">
@@ -56,6 +57,7 @@
     <input type="text" id="movieImg" placeholder="Image URL" required>
     <button type="button" id="addMovieButton" name="button" onclick="createUser()">Add Movie</button>
   </form>
+  <!--Opdater Film Jannick-->
   <form>
     <h2>Opdater Film</h2>
     <input type="text" id="name-update" required>
@@ -86,20 +88,24 @@
     <p>Hmm, there should be some clients right here...</p>
   </section>
 
-  <!-- contact page -->
+  <!-- profile page -->
   <section id="profile" class="page">
     <header class="topbar">
       <h2>Profile</h2>
-
       <a class="right" href="#" onclick="logout()">Logout</a>
     </header>
+    <div id="profilefoto"></div>
+            <input type="file" id="profile_foto" placeholder="vælg profilbillede">
+            <article>
+              <h3>Burhan Tahmasabi</h3>
+              <h5>Aarhus, DK</h5>
+              <p>Hi! My name is Burhan, I’m a creative geek from Aarhus, DK. I enjoy creating eye candy solutions for web and mobile apps. In my freetime i love to watch movies. HMU with a good movie. </p>
+            </article>
 
-  </section>
 
   <section id="login" class="page">
     <header class="topbar">
       <h2>Login</h2>
-    </header>
     <!-- firebase auth container  -->
     <section id="firebaseui-auth-container"></section>
   </section>
