@@ -242,6 +242,12 @@ function search(value) {
   appendUsers(filteredUsers);
 }
 
+// rederigere tekst
+var el = document.getElementById('txt');
+el.ondblclick = function(){
+  this.removeAttribute('readonly');
+};
+
 /* Searchfunction to search in the OMDB api and show movieresults */
 
 function apisearch(value) {
