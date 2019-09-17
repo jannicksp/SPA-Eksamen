@@ -110,7 +110,9 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 const movieRef = db.collection("movies");
+const userRef = db.collection("users");
 let movies = [];
+let currentUser;
 
 // watch the database ref for changes
 movieRef.onSnapshot(function(snapshotData) {
@@ -222,6 +224,7 @@ const ui = new firebaseui.auth.AuthUI(firebase.auth());
 // Listen on authentication state change
 firebase.auth().onAuthStateChanged(function(user) {
   let tabbar = document.querySelector('#tabbar');
+  currentUser = user;
   console.log(user);
   if (user) { // if user exists and is authenticated
     setDefaultPage();
@@ -240,13 +243,53 @@ function logout() {
   firebase.auth().signOut();
 }
 
-function appendUserData(user) {
-  document.querySelector('#profile').innerHTML += `
-    <h3>${user.displayName}</h3>
-    <p>${user.email}</p>
-  `;
+// append user data to profile page
+function appendUserData() {
+  // auth user
+  document.querySelector('#name').value = currentUser.displayName;
+  document.querySelector('#mail').value = currentUser.email;
+
+  // database user
+  userRef.doc(currentUser.uid).get().then(function(doc) {
+    let userData = doc.data();
+    console.log(userData);
+    if (userData) {
+      document.querySelector('#birthdate').value = userData.birthdate;
+      document.querySelector('#hairColor').value = userData.hairColor;
+      document.querySelector('#imagePreview').src = userData.img;
+    }
+  });
 }
 
+// update user data - auth user and database object
+function updateUser() {
+  let user = firebase.auth().currentUser;
+
+  // update auth user
+  user.updateProfile({
+    displayName: document.querySelector('#name').value
+  });
+
+  // update database user
+  userRef.doc(currentUser.uid).set({
+    img: document.querySelector('#imagePreview').src,
+    birthdate: document.querySelector('#birthdate').value,
+    hairColor: document.querySelector('#hairColor').value
+  }, {
+    merge: true
+  });
+}
+
+// ========== Prieview image function ========== //
+function previewImage(file, previewId) {
+  if (file) {
+    let reader = new FileReader();
+    reader.onload = function(event) {
+      document.querySelector('#' + previewId).setAttribute('src', event.target.result);
+    };
+    reader.readAsDataURL(file);
+  }
+}
 // search functionality Jannick
 function search(value) {
   let searchQuery = value.toLowerCase();
