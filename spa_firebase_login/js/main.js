@@ -178,7 +178,7 @@ function updateUser() {
   };
   userRef.doc(selectedUserId).set(userToUpdate);
 }
-unødig funktion*/
+unødig funktion*/ 
 // ========== DELETE ==========
 function deleteUser(id) {
   console.log(id);
@@ -239,7 +239,13 @@ function search(value) {
   }
   console.log(filteredUsers);
   appendUsers(filteredUsers);
+}
 
+// rederigere tekst
+var el = document.getElementById('txt');
+el.ondblclick = function(){
+  this.removeAttribute('readonly');
+};
 
 /* Searchfunction to search in the OMDB api and show movieresults */
 
