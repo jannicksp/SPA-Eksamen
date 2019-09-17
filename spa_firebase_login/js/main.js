@@ -2,30 +2,47 @@
 //search hide Jannick
 
 
-       document.getElementById("searchappear").onclick = function() {
-         let searchinput = document.getElementById("search");
-     if (searchinput.style.display === "none") {
-       searchinput.style.display = "block";
-     } else {
-       searchinput.style.display = "none";
-     }
+document.getElementById("searchappear").onclick = function() {
+  let searchinput = document.getElementById("search");
+  if (searchinput.style.display === "none") {
+    searchinput.style.display = "block";
+  } else {
+    searchinput.style.display = "none";
+  }
 
-//add movie Jannick
+  //add movie Jannick
 
-              }
+}
 
-              document.getElementById("newappear").onclick = function() {
-                let addinput = document.getElementById("addMovieBox");
-            if (addinput.style.display === "none") {
-              addinput.style.display = "block";
-            } else {
-              addinput.style.display = "none";
-            }
+document.getElementById("newappear").onclick = function() {
+  let addinput = document.getElementById("addMovieBox");
+  if (addinput.style.display === "none") {
+    addinput.style.display = "block";
+  } else {
+    addinput.style.display = "none";
+  }
 
+  // burgermenu med animation jannick
+}
 
-                     }
-              function myFunction(x) {
+function myBurger(x) {
   x.classList.toggle("change");
+}
+// sort function Jannick
+function compare(a, b) {
+  if (a.data().movieName < b.data().movieName) {
+    return -1;
+  }
+  if (a.data().movieName > b.data().movieName) {
+    return 1;
+  }
+  return 0;
+}
+
+function sortMovies() {
+  movies = movies.sort(compare)
+  console.log(movies);
+  appendMovies(movies.sort(compare));
 }
 
 // hide all pages
@@ -90,42 +107,41 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+
 const db = firebase.firestore();
-const userRef = db.collection("Users");
-let users =[];
-let currentUser;
+const movieRef = db.collection("movies");
+let movies = [];
 
 // watch the database ref for changes
-userRef.onSnapshot(function(snapshotData) {
-users = snapshotData.docs;
-  appendUsers(users);
+movieRef.onSnapshot(function(snapshotData) {
+  movies = snapshotData.docs;
+  appendMovies(movies);
 });
 
-// append users to the DOM Jannick
-function appendUsers(users) {
+// append movies to the DOM Jannick
+function appendMovies(movies) {
   let htmlTemplate = "";
-  for (let user of users) {
-    console.log(user.id);
-    console.log(user.data().movieName);
+  for (let movie of movies) {
+    console.log(movie.id);
+    console.log(movie.data().movieName);
     htmlTemplate += `
     <article>
-      <h2>${user.data().movieName}</h2>
-      <img src="${user.data().movieImg}">
-      <h3>${user.data().movieGenre}</h3>
-      <h4>${user.data().moviePlot}</h4>
-      <p>Your Rating:  ${user.data().yourRating} &#9733;</p>
-      <p>IMDB Rating:  ${user.data().movieRating} &#9733;</p>
-      <button onclick="deleteUser('${user.id}')">Delete</button>
+      <h2>${movie.data().movieName}</h2>
+      <img src="${movie.data().movieImg}">
+      <h3>${movie.data().movieGenre}</h3>
+      <h4>${movie.data().moviePlot}</h4>
+      <p>Your Rating:  ${movie.data().yourRating} &#9733;</p>
+      <p>IMDB Rating:  ${movie.data().movieRating} &#9733;</p>
+      <button onclick="deleteMovie('${movie.id}')">Delete</button>
     </article>
     `;
   }
   document.querySelector('#content').innerHTML = htmlTemplate;
-
 }
 
 // ========== CREATE ==========
-// add a new user to firestore (database) Jannick
-function createUser() {
+// add a new movie to firestore (database) Jannick
+function createMovie() {
   // references to the inoput fields
   let yourRatingInput = document.querySelector('#yourRating');
   let movieNameInput = document.querySelector('#movieName');
@@ -135,15 +151,15 @@ function createUser() {
   let movieImgInput = document.querySelector('#movieImg');
   document.querySelector("#apiSearchResults").value = "";
 
-/*
-  let nameInput = document.querySelector('#name');
-  let mailInput = document.querySelector('#mail');
-  let kønInput = document.querySelector('#køn');
-  let alderInput = document.querySelector('#alder');
-  let picInput = document.querySelector('#pic');
-  */
+  /*
+    let nameInput = document.querySelector('#name');
+    let mailInput = document.querySelector('#mail');
+    let kønInput = document.querySelector('#køn');
+    let alderInput = document.querySelector('#alder');
+    let picInput = document.querySelector('#pic');
+    */
 
-  let newUser = {
+  let newMovie = {
     yourRating: yourRatingInput.value,
     movieName: movieNameInput.value,
     movieRating: movieRatingInput.value,
@@ -152,86 +168,44 @@ function createUser() {
     movieImg: movieImgInput.value,
   };
 
-  userRef.add(newUser);
-  document.querySelector("#yourRating").value = "";
+  movieRef.add(newMovie);
+
 }
 
 
 /* ========== UPDATE ==========
 
-function selectUser(id, name, mail) {
+function selectMovie(id, name, mail) {
   // references to the input fields Jannick
   let nameInput = document.querySelector('#name-update');
   let mailInput = document.querySelector('#mail-update');
   nameInput.value = name;
   mailInput.value = mail;
-  selectedUserId = id;
+  selectedMovieId = id;
 }
 
-function updateUser() {
+function updateMovie() {
   let nameInput = document.querySelector('#name-update');
   let mailInput = document.querySelector('#mail-update');
 
-  let userToUpdate = {
+  let MovieToUpdate = {
     name: nameInput.value,
     mail: mailInput.value
   };
-  userRef.doc(selectedUserId).set(userToUpdate);
+  movieRef.doc(selectedMovieId).set(movieToUpdate);
 }
 unødig funktion*/
-// ========== DELETE ==========
-function deleteUser(id) {
-  console.log(id);
-  userRef.doc(id).delete();
-}
-
-// append user data to profile page
-function appendUserData() {
-  // auth user
-  document.querySelector('#name').value = currentUser.displayName;
-  document.querySelector('#mail').value = currentUser.email;
-
-  // database user
-  userRef.doc(currentUser.uid).get().then(function(doc) {
-    let userData = doc.data();
-    console.log(userData);
-    if (userData) {
-      document.querySelector('#birthdate').value = userData.birthdate;
-      document.querySelector('#hairColor').value = userData.hairColor;
-      document.querySelector('#imagePreview').src = userData.img;
-    }
-  });
-}
-
-// update user data - auth user and database object
-function updateUser() {
-  let user = firebase.auth().currentUser;
-
-  // update auth user
-  user.updateProfile({
-    displayName: document.querySelector('#name').value
-  });
-
-  // update database user
-  userRef.doc(currentUser.uid).set({
-    img: document.querySelector('#imagePreview').src,
-    birthdate: document.querySelector('#birthdate').value,
-    hairColor: document.querySelector('#hairColor').value
-  }, {
-    merge: true
-  });
-}
-
-// ========== Prieview image function ========== //
-function previewImage(file, previewId) {
-  if (file) {
-    let reader = new FileReader();
-    reader.onload = function(event) {
-      document.querySelector('#' + previewId).setAttribute('src', event.target.result);
-    };
-    reader.readAsDataURL(file);
+// ========== DELETE med Alert Jannick==========
+function deleteMovie(id) {
+  let r= confirm("Er du sikker på at du vil slette filmen?");
+  if (r == true) {
+    console.log(id);
+    movieRef.doc(id).delete();
   }
-}
+  }
+
+
+
 
 // Firebase UI configuration
 const uiConfig = {
@@ -248,11 +222,10 @@ const ui = new firebaseui.auth.AuthUI(firebase.auth());
 // Listen on authentication state change
 firebase.auth().onAuthStateChanged(function(user) {
   let tabbar = document.querySelector('#tabbar');
-  currentUser=user
   console.log(user);
   if (user) { // if user exists and is authenticated
     setDefaultPage();
-    tabbar.classList.remove("hide");
+    tabbar.classList.remove("hide");+
     appendUserData(user);
   } else { // if user is not logged in
     showPage("login");
@@ -262,24 +235,30 @@ firebase.auth().onAuthStateChanged(function(user) {
   showLoader(false);
 });
 
-
 // sign out user
 function logout() {
   firebase.auth().signOut();
 }
 
+function appendUserData(user) {
+  document.querySelector('#profile').innerHTML += `
+    <h3>${user.displayName}</h3>
+    <p>${user.email}</p>
+  `;
+}
+
 // search functionality Jannick
 function search(value) {
   let searchQuery = value.toLowerCase();
-  let filteredUsers = [];
-  for (let user of users) {
-    let title = user.data().movieName.toLowerCase();
+  let filteredMovies = [];
+  for (let movie of movies) {
+    let title = movie.data().movieName.toLowerCase();
     if (title.includes(searchQuery)) {
-      filteredUsers.push(user);
+      filteredMovies.push(movie);
     }
   }
-  console.log(filteredUsers);
-  appendUsers(filteredUsers);
+  console.log(filteredMovies);
+  appendMovies(filteredMovies);
 }
 
 
@@ -290,12 +269,12 @@ function apisearch(value) {
 
   let url = "http://www.omdbapi.com/?apikey=196312ed&s=" + value;
   console.log(url);
-console.log(value);
-console.log(value.length);
+  console.log(value);
+  console.log(value.length);
 
-if (value.length == 0) {
-  document.querySelector("#grid-products").innerHTML = "";
-}
+  if (value.length == 0) {
+    document.querySelector("#grid-products").innerHTML = "";
+  }
 
   fetch(url)
     .then(function(response) {
@@ -303,12 +282,12 @@ if (value.length == 0) {
     })
     .then(function(json) {
       console.log(json.Search);
-      appendProducts(json.Search);
+      appendMovieList(json.Search);
     });
 
 }
 
-function appendProducts(products) {
+function appendMovieList(products) {
   let htmlTemplate = "";
   for (let product of products) {
     console.log(product);
@@ -326,7 +305,7 @@ function appendProducts(products) {
 }
 
 function hideMovieSearch() {
-    document.querySelector("#grid-products").innerHTML = "";
+  document.querySelector("#grid-products").innerHTML = "";
 
 }
 
@@ -347,10 +326,59 @@ function apisearch2(value) {
 }
 
 function appendMovieInfo(MovieInfo) {
-document.querySelector("#movieName").value = `${MovieInfo.Title} (${MovieInfo.Year})`;
-document.querySelector("#movieRating").value = `${MovieInfo.imdbRating}`;
-document.querySelector("#moviePlot").value = `${MovieInfo.Plot}`;
-document.querySelector("#movieGenre").value = `${MovieInfo.Genre}`;
-document.querySelector("#movieImg").value = `${MovieInfo.Poster}`;
+  document.querySelector("#movieName").value = `${MovieInfo.Title} (${MovieInfo.Year})`;
+  document.querySelector("#movieRating").value = `${MovieInfo.imdbRating}`;
+  document.querySelector("#moviePlot").value = `${MovieInfo.Plot}`;
+  document.querySelector("#movieGenre").value = `${MovieInfo.Genre}`;
+  document.querySelector("#movieImg").value = `${MovieInfo.Poster}`;
 
+}
+
+/* Feed */
+
+let moviesFeed = [];
+
+console.log(moviesFeed);
+
+function appendMoviesFeed(moviesFeed) {
+  for (let movieFeed of moviesFeed) {
+    console.log(movieFeed);
+    document.querySelector("#grid-teachers").innerHTML += `
+      <article id="movieFeedBox">
+        <img id="left" src='${movieFeed.movieImg}'>
+        <h3 class="right">${movieFeed.movieName}</h3>
+        <p class="right"> Your Rating:  ${movieFeed.yourRating} &#9733;</p>
+        <p class="right">IMDB Rating:  ${movieFeed.movieRating} &#9733;</p>
+      </article>
+    `;
+
+  }
+}
+
+appendMoviesFeed(moviesFeed);
+
+function createMovieFeed() {
+  // get the values from the input fields
+  let yourRating = document.querySelector('#yourRating').value;
+  let movieName = document.querySelector('#movieName').value;
+  let movieRating = document.querySelector('#movieRating').value;
+  let movieImg = document.querySelector('#movieImg').value;
+
+  // create a new object
+  let newmoviefeed = {
+    movieName: movieName,
+    yourRating: yourRating,
+    movieRating: movieRating,
+    movieImg: movieImg
+  };
+
+  // push the new object to the array
+  moviesFeed.push(newmoviefeed);
+
+  // reset grid
+  document.querySelector("#grid-teachers").innerHTML = "";
+  // call appendTeachers to append all teachers again
+  appendMoviesFeed(moviesFeed);
+  // To reset the "yourRating" input field
+  document.querySelector("#yourRating").value = "";
 }
