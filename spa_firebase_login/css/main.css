@@ -4,7 +4,7 @@
   --light-green: rgb(172, 198, 201);
   --light-grey: #f1f1f4;
   --text-color-light: #f1f1f1;
-  --text-color-dark: #333;
+  --text-color-dark: black;
   --font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -22,15 +22,17 @@ body {
   margin: 0;
 }
 
-#flexmenu{
+#flexmenu {
   display: flex;
   justify-content: space-between;
 }
+
 /*  burgermenu*/
 .container {
   display: inline-block;
   cursor: pointer;
 }
+
 .bar1, .bar2, .bar3 {
   width: 35px;
   height: 2px;
@@ -44,12 +46,15 @@ body {
   transform: rotate(-45deg) translate(-9px, 6px);
 }
 
-.change .bar2 {opacity: 0;}
+.change .bar2 {
+  opacity: 0;
+}
 
 .change .bar3 {
   -webkit-transform: rotate(45deg) translate(-8px, -8px);
   transform: rotate(45deg) translate(-8px, -8px);
 }
+
 h1 {
   font-size: 2em;
   font-weight: 300;
@@ -73,7 +78,7 @@ h1 {
 .topbar h2 {
   margin: 0;
   font-weight: 300;
-      background-color: #e8aa26;
+  background-color: #e8aa26;
 }
 
 .topbar a {
@@ -93,7 +98,8 @@ h1 {
 
 /* ---------- tabbar styling ---------- */
 .tabbar {
-  background-color: #e8aa26;;
+  background-color: #e8aa26;
+  ;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -121,15 +127,16 @@ h1 {
 
 /* Add a color to the active/current link */
 .tabbar a.active {
-background-image: url("../img/black-texture-background.jpg");
+  background-image: url("../img/black-texture-background.jpg");
   color: var(--text-color-light);
 }
+
 /*plusmoviebutton*/
-#newappear{
+#newappear {
   width: 25%;
   margin: 5%;
-
 }
+
 /* ---------- page styling ---------- */
 .page {
   display: none;
@@ -234,7 +241,7 @@ background-image: url("../img/black-texture-background.jpg");
 .mdl-button--raised.mdl-button--colored,
 .mdl-button--raised.mdl-button--colored:active,
 .mdl-button--raised.mdl-button--colored:hover {
-  background: var(--green);
+  background-image: url("../img/black-texture-background.jpg");
   color: #fff;
   border-radius: 0;
 }
@@ -242,6 +249,7 @@ background-image: url("../img/black-texture-background.jpg");
 .firebaseui-textfield.mdl-textfield .firebaseui-label::after {
   background-color: var(--green);
 }
+
 form {
   background-color: #e8aa26;
   padding: 2em 1em 2.5em;
@@ -273,6 +281,18 @@ article button {
   width: 40%;
 }
 
+button {
+  font-weight: 200;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  padding: 10px 8px;
+  border-radius: 0;
+  color: White;
+  background-color: #e8aa26;
+  width: 40%;
+}
+
 input {
   margin: 1em auto;
   width: 100%;
@@ -281,7 +301,6 @@ input {
   box-sizing: border-box;
   display: block;
   background-color: White;
-
 }
 
 /* Grid container */
@@ -290,14 +309,12 @@ input {
   grid-template-columns: 100%;
   padding: 10px;
 }
-/*profilnavn*/
-#login{
 
-}
+/*profilnavn*/
+#login {}
 
 /*profilpic*/
-
-#profilefoto{
+#profilefoto {
   border-radius: 50%;
   width: 200px;
   height: 200px;
@@ -305,15 +322,8 @@ input {
   background-size: cover;
   margin-left: auto;
   margin-right: auto;
-
   transform: rotate(360deg);
-
 }
-
-
-
-
-
 
 @media (min-width: 600px) {
   .grid-container {
@@ -331,20 +341,18 @@ input {
   text-align: center;
   padding: 10px;
 }
-article{
-  background-color: rgba(0,0,0,0.3);
+
+article {
+  background-color: rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-
-
 }
 
 article h2 {
   font-family: 'Libre Franklin', sans-serif;
 }
 
-article h1,h2,h3,h4,p{
+article h1, h2, h3, h4, p {
   color: white;
-
 }
 
 .grid-container>article img {
@@ -362,16 +370,14 @@ p .wetch {
 }
 
 /* Searchresults */
-
-.grid-item h3{
+.grid-item h3 {
   font-size: 70%;
   margin-top: 6%;
 }
 
-.grid-item img{
+.grid-item img {
   width: 30%;
 }
-
 
 #addMovieButton {
   margin: 3% 0 7% 0;
