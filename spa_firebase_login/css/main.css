@@ -406,6 +406,12 @@ p .wetch {
   background-image: url("../img/black-texture-background.jpg");
   width: 40%;
 }
+#addMovieBox{
+  display: none;
+}
+#search{
+  display: none;
+}
 #left {
   width: 25%;
   float: left;
