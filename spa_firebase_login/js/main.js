@@ -15,7 +15,7 @@
               }
 
               document.getElementById("newappear").onclick = function() {
-                let addinput = document.getElementById("new");
+                let addinput = document.getElementById("addMovieBox");
             if (addinput.style.display === "none") {
               addinput.style.display = "block";
             } else {
@@ -158,7 +158,7 @@ function createUser() {
 }
 
 
-// ========== UPDATE ==========
+/* ========== UPDATE ==========
 
 function selectUser(id, name, mail) {
   // references to the input fields Jannick
@@ -179,7 +179,7 @@ function updateUser() {
   };
   userRef.doc(selectedUserId).set(userToUpdate);
 }
-
+unødig funktion*/ 
 // ========== DELETE ==========
 function deleteUser(id) {
   console.log(id);

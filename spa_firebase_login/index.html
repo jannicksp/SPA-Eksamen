@@ -41,9 +41,10 @@
     </header>
     <input id="search" type="search" placeholder="Search" onkeyup="search(this.value)">
     <section id="content" class="grid-container"></section>
-    <h2>Add New Movie</h2>
+    <h2 id="newappear" onclick="shownew">Add New Movie</h2>
 
-   <!-- Place to input movie title and search for it in the IMDB API-->
+   <!-- Place to input movie title and search for it in the OMDB API-->
+   <form id= "addMovieBox">
    <div id="searchresults">
     <input id="apiSearchResults" type="search" placeholder="Search" onkeyup="apisearch(this.value)">
     <section id="grid-products" class="grid-container2"></section>
@@ -57,13 +58,13 @@
     <input type="text" id="movieImg" placeholder="Image URL" required>
     <button type="button" id="addMovieButton" name="button" onclick="createUser()">Add Movie</button>
   </form>
-  <!--Opdater Film Jannick-->
+  <!--Opdater Film Jannick
   <form>
     <h2>Opdater Film</h2>
     <input type="text" id="name-update" required>
     <input type="email" id="mail-update" required>
     <button type="button" name="button" onclick="updateUser()">Opdater Film</button>
-  </form>
+  </form> -->
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-app.js"></script>
   <!-- Firebase Firestore (database) JS SDK -->
