@@ -92,30 +92,30 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
-const userRef = db.collection("Users");
-let users =[];
+const movieRef = db.collection("movies");
+let movies =[];
 
 // watch the database ref for changes
-userRef.onSnapshot(function(snapshotData) {
-users = snapshotData.docs;
-  appendUsers(users);
+movieRef.onSnapshot(function(snapshotData) {
+movies = snapshotData.docs;
+  appendMovies(movies);
 });
 
-// append users to the DOM Jannick
-function appendUsers(users) {
+// append movies to the DOM Jannick
+function appendMovies(movies) {
   let htmlTemplate = "";
-  for (let user of users) {
-    console.log(user.id);
-    console.log(user.data().movieName);
+  for (let movie of movies) {
+    console.log(movie.id);
+    console.log(movie.data().movieName);
     htmlTemplate += `
     <article>
-      <h2>${user.data().movieName}</h2>
-      <img src="${user.data().movieImg}">
-      <h3>${user.data().movieGenre}</h3>
-      <h4>${user.data().moviePlot}</h4>
-      <p>Your Rating:  ${user.data().yourRating} &#9733;</p>
-      <p>IMDB Rating:  ${user.data().movieRating} &#9733;</p>
-      <button onclick="deleteUser('${user.id}')">Delete</button>
+      <h2>${movie.data().movieName}</h2>
+      <img src="${movie.data().movieImg}">
+      <h3>${movie.data().movieGenre}</h3>
+      <h4>${movie.data().moviePlot}</h4>
+      <p>Your Rating:  ${movie.data().yourRating} &#9733;</p>
+      <p>IMDB Rating:  ${movie.data().movieRating} &#9733;</p>
+      <button onclick="deleteMovie('${movie.id}')">Delete</button>
     </article>
     `;
   }
@@ -124,8 +124,8 @@ function appendUsers(users) {
 }
 
 // ========== CREATE ==========
-// add a new user to firestore (database) Jannick
-function createUser() {
+// add a new movie to firestore (database) Jannick
+function createMovie() {
   // references to the inoput fields
   let yourRatingInput = document.querySelector('#yourRating');
   let movieNameInput = document.querySelector('#movieName');
@@ -143,7 +143,7 @@ function createUser() {
   let picInput = document.querySelector('#pic');
   */
 
-  let newUser = {
+  let newMovie = {
     yourRating: yourRatingInput.value,
     movieName: movieNameInput.value,
     movieRating: movieRatingInput.value,
@@ -152,37 +152,38 @@ function createUser() {
     movieImg: movieImgInput.value,
   };
 
-  userRef.add(newUser);
+  movieRef.add(newMovie);
   document.querySelector("#yourRating").value = "";
 }
 
 
 /* ========== UPDATE ==========
 
-function selectUser(id, name, mail) {
+function selectMovie(id, name, mail) {
   // references to the input fields Jannick
   let nameInput = document.querySelector('#name-update');
   let mailInput = document.querySelector('#mail-update');
   nameInput.value = name;
   mailInput.value = mail;
-  selectedUserId = id;
+  selectedMovieId = id;
 }
 
-function updateUser() {
+function updateMovie() {
   let nameInput = document.querySelector('#name-update');
   let mailInput = document.querySelector('#mail-update');
 
-  let userToUpdate = {
+  let MovieToUpdate = {
     name: nameInput.value,
     mail: mailInput.value
   };
-  userRef.doc(selectedUserId).set(userToUpdate);
+  movieRef.doc(selectedMovieId).set(movieToUpdate);
 }
-unødig funktion*/ 
+unødig funktion*/
+
 // ========== DELETE ==========
-function deleteUser(id) {
+function deleteMovie(id) {
   console.log(id);
-  userRef.doc(id).delete();
+  movieRef.doc(id).delete();
 }
 
 
@@ -230,22 +231,17 @@ function appendUserData(user) {
 // search functionality Jannick
 function search(value) {
   let searchQuery = value.toLowerCase();
-  let filteredUsers = [];
-  for (let user of users) {
-    let title = user.data().movieName.toLowerCase();
+  let filteredMovies = [];
+  for (let movie of movies) {
+    let title = movie.data().movieName.toLowerCase();
     if (title.includes(searchQuery)) {
-      filteredUsers.push(user);
+      filteredMovies.push(movie);
     }
   }
-  console.log(filteredUsers);
-  appendUsers(filteredUsers);
+  console.log(filteredMovies);
+  appendUsers(filteredMovies);
 }
 
-// rederigere tekst
-var el = document.getElementById('txt');
-el.ondblclick = function(){
-  this.removeAttribute('readonly');
-};
 
 /* Searchfunction to search in the OMDB api and show movieresults */
 
@@ -267,12 +263,12 @@ if (value.length == 0) {
     })
     .then(function(json) {
       console.log(json.Search);
-      appendProducts(json.Search);
+      appendMovieList(json.Search);
     });
 
 }
 
-function appendProducts(products) {
+function appendMovieList(products) {
   let htmlTemplate = "";
   for (let product of products) {
     console.log(product);
