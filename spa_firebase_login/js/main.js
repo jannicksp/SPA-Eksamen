@@ -2,44 +2,46 @@
 //search hide Jannick
 
 
-       document.getElementById("searchappear").onclick = function() {
-         let searchinput = document.getElementById("search");
-     if (searchinput.style.display === "none") {
-       searchinput.style.display = "block";
-     } else {
-       searchinput.style.display = "none";
-     }
+document.getElementById("searchappear").onclick = function() {
+  let searchinput = document.getElementById("search");
+  if (searchinput.style.display === "none") {
+    searchinput.style.display = "block";
+  } else {
+    searchinput.style.display = "none";
+  }
 
-//add movie Jannick
+  //add movie Jannick
 
-              }
+}
 
-              document.getElementById("newappear").onclick = function() {
-                let addinput = document.getElementById("addMovieBox");
-            if (addinput.style.display === "none") {
-              addinput.style.display = "block";
-            } else {
-              addinput.style.display = "none";
-            }
+document.getElementById("newappear").onclick = function() {
+  let addinput = document.getElementById("addMovieBox");
+  if (addinput.style.display === "none") {
+    addinput.style.display = "block";
+  } else {
+    addinput.style.display = "none";
+  }
 
-// burgermenu med animation jannick
-                     }
-              function myBurger(x) {
+  // burgermenu med animation jannick
+}
+
+function myBurger(x) {
   x.classList.toggle("change");
 }
 // sort function Jannick
-function compare( a, b ) {
-  if ( a.data().movieName < b.data().movieName ){
+function compare(a, b) {
+  if (a.data().movieName < b.data().movieName) {
     return -1;
   }
-  if ( a.data().movieName > b.data().movieName ){
+  if (a.data().movieName > b.data().movieName) {
     return 1;
   }
   return 0;
 }
+
 function sortMovies() {
-  movies=movies.sort(compare)
-console.log(movies);
+  movies = movies.sort(compare)
+  console.log(movies);
   appendMovies(movies.sort(compare));
 }
 
@@ -108,11 +110,11 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 const movieRef = db.collection("movies");
-let movies =[];
+let movies = [];
 
 // watch the database ref for changes
 movieRef.onSnapshot(function(snapshotData) {
-movies = snapshotData.docs;
+  movies = snapshotData.docs;
   appendMovies(movies);
 });
 
@@ -149,13 +151,13 @@ function createMovie() {
   let movieImgInput = document.querySelector('#movieImg');
   document.querySelector("#apiSearchResults").value = "";
 
-/*
-  let nameInput = document.querySelector('#name');
-  let mailInput = document.querySelector('#mail');
-  let kønInput = document.querySelector('#køn');
-  let alderInput = document.querySelector('#alder');
-  let picInput = document.querySelector('#pic');
-  */
+  /*
+    let nameInput = document.querySelector('#name');
+    let mailInput = document.querySelector('#mail');
+    let kønInput = document.querySelector('#køn');
+    let alderInput = document.querySelector('#alder');
+    let picInput = document.querySelector('#pic');
+    */
 
   let newMovie = {
     yourRating: yourRatingInput.value,
@@ -193,11 +195,15 @@ function updateMovie() {
   movieRef.doc(selectedMovieId).set(movieToUpdate);
 }
 unødig funktion*/
-// ========== DELETE ==========
+// ========== DELETE med Alert Jannick==========
 function deleteMovie(id) {
-  console.log(id);
-  movieRef.doc(id).delete();
-}
+  let r= confirm("Er du sikker på at du vil slette filmen?");
+  if (r == true) {
+    console.log(id);
+    movieRef.doc(id).delete();
+  }
+  }
+
 
 
 
@@ -263,12 +269,12 @@ function apisearch(value) {
 
   let url = "http://www.omdbapi.com/?apikey=196312ed&s=" + value;
   console.log(url);
-console.log(value);
-console.log(value.length);
+  console.log(value);
+  console.log(value.length);
 
-if (value.length == 0) {
-  document.querySelector("#grid-products").innerHTML = "";
-}
+  if (value.length == 0) {
+    document.querySelector("#grid-products").innerHTML = "";
+  }
 
   fetch(url)
     .then(function(response) {
@@ -299,7 +305,7 @@ function appendMovieList(products) {
 }
 
 function hideMovieSearch() {
-    document.querySelector("#grid-products").innerHTML = "";
+  document.querySelector("#grid-products").innerHTML = "";
 
 }
 
@@ -320,11 +326,11 @@ function apisearch2(value) {
 }
 
 function appendMovieInfo(MovieInfo) {
-document.querySelector("#movieName").value = `${MovieInfo.Title} (${MovieInfo.Year})`;
-document.querySelector("#movieRating").value = `${MovieInfo.imdbRating}`;
-document.querySelector("#moviePlot").value = `${MovieInfo.Plot}`;
-document.querySelector("#movieGenre").value = `${MovieInfo.Genre}`;
-document.querySelector("#movieImg").value = `${MovieInfo.Poster}`;
+  document.querySelector("#movieName").value = `${MovieInfo.Title} (${MovieInfo.Year})`;
+  document.querySelector("#movieRating").value = `${MovieInfo.imdbRating}`;
+  document.querySelector("#moviePlot").value = `${MovieInfo.Plot}`;
+  document.querySelector("#movieGenre").value = `${MovieInfo.Genre}`;
+  document.querySelector("#movieImg").value = `${MovieInfo.Poster}`;
 
 }
 
