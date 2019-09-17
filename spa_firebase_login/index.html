@@ -29,7 +29,7 @@
   <section id="home" class="page">
     <header class="topbar">
       <div id="flexmenu">
-        <div class="container" onclick="myFunction(this)">
+        <div class="container" onclick="myBurger(this)">
   <div class="bar1"></div>
   <div class="bar2"></div>
   <div class="bar3"></div>
@@ -40,6 +40,8 @@
 
     </header>
     <input id="search" type="search" placeholder="Search" onkeyup="search(this.value)">
+    <button onclick="sortMovies()">Sorter</button>
+    <p id="demo"></p>
     <section id="content" class="grid-container"></section>
     <div>
     <h2>Add New Movie</h2>
