@@ -28,10 +28,19 @@
   x.classList.toggle("change");
 }
 // sort function Jannick
-
+function compare( a, b ) {
+  if ( a.data().movieName < b.data().movieName ){
+    return -1;
+  }
+  if ( a.data().movieName > b.data().movieName ){
+    return 1;
+  }
+  return 0;
+}
 function sortMovies() {
-  movies.sort();
-  document.getElementById("demo").innerHTML = movies;
+  movies=movies.sort(compare)
+console.log(movies);
+  appendMovies(movies.sort(compare));
 }
 
 // hide all pages
