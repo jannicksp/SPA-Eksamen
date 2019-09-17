@@ -158,7 +158,7 @@ function createUser() {
 }
 
 
-// ========== UPDATE ==========
+/* ========== UPDATE ==========
 
 function selectUser(id, name, mail) {
   // references to the input fields Jannick
@@ -179,7 +179,7 @@ function updateUser() {
   };
   userRef.doc(selectedUserId).set(userToUpdate);
 }
-
+unødig funktion*/ 
 // ========== DELETE ==========
 function deleteUser(id) {
   console.log(id);
