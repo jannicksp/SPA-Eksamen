@@ -135,7 +135,6 @@ function appendMovies(movies) {
     `;
   }
   document.querySelector('#content').innerHTML = htmlTemplate;
-
 }
 
 // ========== CREATE ==========
@@ -168,7 +167,7 @@ function createMovie() {
   };
 
   movieRef.add(newMovie);
-  document.querySelector("#yourRating").value = "";
+
 }
 
 
@@ -220,7 +219,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   console.log(user);
   if (user) { // if user exists and is authenticated
     setDefaultPage();
-    tabbar.classList.remove("hide");
+    tabbar.classList.remove("hide");+
     appendUserData(user);
   } else { // if user is not logged in
     showPage("login");
@@ -253,7 +252,7 @@ function search(value) {
     }
   }
   console.log(filteredMovies);
-  appendUsers(filteredMovies);
+  appendMovies(filteredMovies);
 }
 
 
@@ -327,4 +326,53 @@ document.querySelector("#moviePlot").value = `${MovieInfo.Plot}`;
 document.querySelector("#movieGenre").value = `${MovieInfo.Genre}`;
 document.querySelector("#movieImg").value = `${MovieInfo.Poster}`;
 
+}
+
+/* Feed */
+
+let moviesFeed = [];
+
+console.log(moviesFeed);
+
+function appendMoviesFeed(moviesFeed) {
+  for (let movieFeed of moviesFeed) {
+    console.log(movieFeed);
+    document.querySelector("#grid-teachers").innerHTML += `
+      <article id="movieFeedBox">
+        <img id="left" src='${movieFeed.movieImg}'>
+        <h3 class="right">${movieFeed.movieName}</h3>
+        <p class="right"> Your Rating:  ${movieFeed.yourRating} &#9733;</p>
+        <p class="right">IMDB Rating:  ${movieFeed.movieRating} &#9733;</p>
+      </article>
+    `;
+
+  }
+}
+
+appendMoviesFeed(moviesFeed);
+
+function createMovieFeed() {
+  // get the values from the input fields
+  let yourRating = document.querySelector('#yourRating').value;
+  let movieName = document.querySelector('#movieName').value;
+  let movieRating = document.querySelector('#movieRating').value;
+  let movieImg = document.querySelector('#movieImg').value;
+
+  // create a new object
+  let newmoviefeed = {
+    movieName: movieName,
+    yourRating: yourRating,
+    movieRating: movieRating,
+    movieImg: movieImg
+  };
+
+  // push the new object to the array
+  moviesFeed.push(newmoviefeed);
+
+  // reset grid
+  document.querySelector("#grid-teachers").innerHTML = "";
+  // call appendTeachers to append all teachers again
+  appendMoviesFeed(moviesFeed);
+  // To reset the "yourRating" input field
+  document.querySelector("#yourRating").value = "";
 }

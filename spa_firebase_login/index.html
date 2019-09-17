@@ -63,7 +63,7 @@
     <input type="text" id="moviePlot" placeholder="Movie Plot" required>
     <input type="text" id="movieGenre" placeholder="Movie genre" required>
     <input type="text" id="movieImg" placeholder="Image URL" required>
-    <button type="button" id="addMovieButton" name="button" onclick="createMovie()">Add Movie</button>
+    <button type="button" id="addMovieButton" name="button" onclick="createMovie(), createMovieFeed()">Add Movie</button>
   </form>
   <!--Opdater Film Jannick
   <form>
@@ -79,21 +79,21 @@
 
   </section>
 
-  <!-- about page -->
+  <!-- Feed -->
   <section id="about" class="page">
     <header class="topbar">
       <h2>Feed</h2>
     </header>
+  <section id="grid-teachers" class="grid-container"></section>
 
-    </div>
   </section>
 
-  <!-- clients page -->
+  <!-- Friend list -->
   <section id="clients" class="page">
     <header class="topbar">
       <h2>Friends</h2>
     </header>
-    <p>Hmm, there should be some clients right here...</p>
+    <p>List of friends</p>
   </section>
 
   <!-- profile page -->

@@ -385,3 +385,17 @@ p .wetch {
   background-image: url("../img/black-texture-background.jpg");
   width: 40%;
 }
+
+#left {
+  width: 25%;
+  float: left;
+  margin-top: 5%;
+}
+
+.right {
+  font-size: 98%;
+}
+
+#movieFeedBox {
+
+}
