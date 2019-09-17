@@ -38,7 +38,7 @@
           <div class="bar3"></div>
         </div>
         <h2>Wetch</h2>
-        <h2 class="fa fa-fw fa-search" id="searchappear" onclick="showSearch"></h2>
+        <div class="fa fa-fw fa-search" id="searchappear" onclick="showSearch"></div>
       </div>
 
     </header>
@@ -54,17 +54,17 @@
 <button class="wobble-hor-bottom" onclick="sortMovies()">Sortér</button>
 </div>
     <p id="demo"></p>
-    <section id="content" class="grid-container"></section>
+    <div id="content" class="grid-container"></div>
     <div>
     <h2>Add New Movie</h2>
-    <img id="newappear" onclick="shownew" src="img/addmovie2.png" alt="addmovie"
+    <img id="newappear" onclick="shownew" src="img/addmovie2.png" alt="addmovie">
   </div>
 
    <!-- Place to input movie title and search for it in the OMDB API-->
    <form id= "addMovieBox">
    <div id="searchresults">
     <input id="apiSearchResults" type="search" placeholder="Search" onkeyup="apisearch(this.value)">
-    <section id="grid-products" class="grid-container2"></section>
+    <div id="grid-products" class="grid-container2"></div>
   </div>
   <input type="number" id="yourRating" placeholder="Your rating from 1-10" required>
   <br>
@@ -94,7 +94,7 @@
     <header class="topbar">
       <h2>Feed</h2>
     </header>
-  <section id="grid-teachers" class="grid-container"></section>
+  <div id="grid-teachers" class="grid-container"></div>
 
   </section>
 
@@ -120,7 +120,7 @@
       <h2>Login</h2>
     </header>
     <!-- firebase auth container  -->
-    <section id="firebaseui-auth-container"></section>
+    <div id="firebaseui-auth-container"></div>
   </section>
 
   <!-- loader  -->
