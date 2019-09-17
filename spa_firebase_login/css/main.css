@@ -363,4 +363,36 @@ p .wetch {
   width: 500px;
 }
 
+/* Searchresults */
+
+.grid-item h3{
+  font-size: 70%;
+  margin-top: 6%;
+}
+
+.grid-item img{
+  width: 30%;
+}
 /*
+#addMovieButton {
+  color: white;
+  font-weight: bold;
+  background-color: orange;
+  padding: 1%;
+  margin: 2%;
+
+}
+*/
+
+#addMovieButton {
+  margin: 3% 0 7% 0;
+  font-weight: 200;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  padding: 10px 8px;
+  border-radius: 0;
+  color: White;
+  background-color: #e8aa26;
+  width: 40%;
+}
