@@ -15,7 +15,7 @@
               }
 
               document.getElementById("newappear").onclick = function() {
-                let addinput = document.getElementById("new");
+                let addinput = document.getElementById("addMovieBox");
             if (addinput.style.display === "none") {
               addinput.style.display = "block";
             } else {
