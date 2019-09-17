@@ -390,7 +390,7 @@ function appendMoviesFeed(moviesFeed) {
   for (let movieFeed of moviesFeed) {
     console.log(movieFeed);
     htmlTemplate += `
-    <p id="haveWatched">${currentUser.displayName} has recently watched:</p>
+    <p id="haveWatched">${movieFeed.data().personName} has recently watched:</p>
       <article id="movieFeedBox">
         <img id="left" src='${movieFeed.data().movieImg}'>
         <h3 class="right">${movieFeed.data().movieName}</h3>
@@ -405,6 +405,7 @@ function appendMoviesFeed(moviesFeed) {
 
 function createMovieFeed() {
   // get the values from the input fields
+  let personName = `${currentUser.displayName}`;
   let yourRating = document.querySelector('#yourRating').value;
   let movieName = document.querySelector('#movieName').value;
   let movieRating = document.querySelector('#movieRating').value;
@@ -412,6 +413,7 @@ function createMovieFeed() {
 
   // create a new object
   let newmoviefeed = {
+    personName: personName,
     movieName: movieName,
     yourRating: yourRating,
     movieRating: movieRating,
