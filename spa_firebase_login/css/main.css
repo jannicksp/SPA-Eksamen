@@ -292,7 +292,22 @@ select {
   background-color: #e8aa26;
   width: 40%;
 }
+button {
+  font-weight: 200;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  padding: 10px 8px;
+  border-radius: 0;
+  color: White;
+  background-color: #e8aa26;
+  width: 40%;
+}
+#flexsort{
+  margin: 5%;
+  
 
+}
 input {
   margin: 1em auto;
   width: 100%;

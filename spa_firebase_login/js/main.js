@@ -196,11 +196,15 @@ function updateMovie() {
   movieRef.doc(selectedMovieId).set(movieToUpdate);
 }
 unødig funktion*/
-// ========== DELETE ==========
+// ========== DELETE med Alert Jannick==========
 function deleteMovie(id) {
-  console.log(id);
-  movieRef.doc(id).delete();
-}
+  let r= confirm("Er du sikker på at du vil slette filmen?");
+  if (r == true) {
+    console.log(id);
+    movieRef.doc(id).delete();
+  }
+  }
+
 
 
 

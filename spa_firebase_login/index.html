@@ -43,13 +43,16 @@
 
     </header>
     <input class="scale-up-center" id="search" type="search" placeholder="Search" onkeyup="search(this.value)">
+<div id="flexsort">
 <select>
-    <option class="wobble-hor-bottom" onclick="sortMovies()">Sorter Alfabetisk</option>
+    <option >Sorter Alfabetisk </option>
     <option >Sorter Genre</option>
     <option >Sorter Nyeste</option>
     <option >Sorter Ældste</option>
     <option >Sorter Bedste Anmeldelse</option>
 </select>
+<button class="wobble-hor-bottom" onclick="sortMovies()">Sortér</button>
+</div>
     <p id="demo"></p>
     <section id="content" class="grid-container"></section>
     <div>
