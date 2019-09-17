@@ -392,10 +392,10 @@ function appendMoviesFeed(moviesFeed) {
     htmlTemplate += `
     <p id="haveWatched">${movieFeed.data().personName} has recently watched:</p>
       <article id="movieFeedBox">
-        <img id="left" src='${movieFeed.data().movieImg}'>
-        <h3 class="right">${movieFeed.data().movieName}</h3>
-        <p class="right"> Your Rating:  ${movieFeed.data().yourRating} &#9733;</p>
-        <p class="right"> IMDB Rating:  ${movieFeed.data().movieRating} &#9733;</p>
+        <img id="feedleft" src='${movieFeed.data().movieImg}'>
+        <h3 id="feedTitle" class="feedright">${movieFeed.data().movieName}</h3>
+        <p class="feedright"> ${movieFeed.data().personName}'s Rating:  ${movieFeed.data().yourRating} &#9733;</p>
+        <p class="feedright"> IMDB Rating:  ${movieFeed.data().movieRating} &#9733;</p>
       </article>
     `;
 
@@ -410,6 +410,7 @@ function createMovieFeed() {
   let movieName = document.querySelector('#movieName').value;
   let movieRating = document.querySelector('#movieRating').value;
   let movieImg = document.querySelector('#movieImg').value;
+
 
   // create a new object
   let newmoviefeed = {

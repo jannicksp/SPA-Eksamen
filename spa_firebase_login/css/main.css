@@ -412,13 +412,19 @@ p .wetch {
 #search{
   display: none;
 }
-#left {
+#feedleft {
   width: 25%;
   float: left;
   margin-top: 5%;
 }
 
-.right {
+#feedTitle {
+  font-size: 100%;
+  font-weight: 700;
+  margin-top: 10%;
+}
+
+.feedright {
   font-size: 98%;
 }
 
