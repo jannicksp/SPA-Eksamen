@@ -105,7 +105,7 @@ const firebaseConfig = {
   messagingSenderId: "989289290205",
   appId: "1:989289290205:web:9c6ab89d96734a81d2be34"
 };
-// Initialize Firebase
+// Initialize Firebase Jannick og Burhan
 firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
@@ -120,7 +120,7 @@ movieRef.onSnapshot(function(snapshotData) {
   appendMovies(movies);
 });
 
-// append movies to the DOM Jannick
+// append movies to the DOM Jannick og Ian
 function appendMovies(movies) {
   let htmlTemplate = "";
   for (let movie of movies) {
@@ -142,7 +142,7 @@ function appendMovies(movies) {
 }
 
 // ========== CREATE ==========
-// add a new movie to firestore (database) Jannick
+// add a new movie to firestore (database) Jannick og Ian
 function createMovie() {
   // references to the inoput fields
   let yourRatingInput = document.querySelector('#yourRating');
@@ -221,7 +221,7 @@ const uiConfig = {
 // Init Firebase UI Authentication
 const ui = new firebaseui.auth.AuthUI(firebase.auth());
 
-// Listen on authentication state change
+// Listen on authentication state change Burhan
 firebase.auth().onAuthStateChanged(function(user) {
   let tabbar = document.querySelector('#tabbar');
   currentUser = user;
@@ -249,7 +249,7 @@ function appendUserData() {
   document.querySelector('#name').value = currentUser.displayName;
   document.querySelector('#mail').value = currentUser.email;
 
-  // database user
+  // database user Burhan
   userRef.doc(currentUser.uid).get().then(function(doc) {
     let userData = doc.data();
     console.log(userData);
@@ -303,20 +303,23 @@ function search(value) {
 }
 
 
-/* Searchfunction to search in the OMDB api and show movieresults */
+/* Searchfunction to search in the OMDB api and show movieresults - Ian */
 
+// Function to search throught the API
 function apisearch(value) {
 
-
+// Here it takes the OMDB api site and puts the value from the searchfield at the end, so it finds the right movie.
   let url = "http://www.omdbapi.com/?apikey=196312ed&s=" + value;
   console.log(url);
   console.log(value);
   console.log(value.length);
 
+// If the length of the searchfield is 0, it clears the movie array
   if (value.length == 0) {
     document.querySelector("#grid-products").innerHTML = "";
   }
 
+// Here it fetches movies from the beforegiven url
   fetch(url)
     .then(function(response) {
       return response.json();
@@ -327,7 +330,7 @@ function apisearch(value) {
     });
 
 }
-
+ // Appends movies to the HTML - Fetches it from the api with a backtick string
 function appendMovieList(products) {
   let htmlTemplate = "";
   for (let product of products) {
@@ -350,6 +353,8 @@ function hideMovieSearch() {
 
 }
 
+
+// As before it fetches from the api.
 function apisearch2(value) {
   console.log(value);
 
@@ -366,6 +371,7 @@ function apisearch2(value) {
     });
 }
 
+// Again sets the values of the html fields to api results
 function appendMovieInfo(MovieInfo) {
   document.querySelector("#movieName").value = `${MovieInfo.Title} (${MovieInfo.Year})`;
   document.querySelector("#movieRating").value = `${MovieInfo.imdbRating}`;
