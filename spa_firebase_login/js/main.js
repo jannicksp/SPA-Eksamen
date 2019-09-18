@@ -330,7 +330,8 @@ function apisearch(value) {
     });
 
 }
- // Appends movies to the HTML - Fetches it from the api with a backtick string
+ /* Appends movies to the HTML with id "grid-products" - Fetches it from the api with a backtick string - Ian */
+ // Furthermore it utilizes a "for loop", to run through the array and append all the different objects
 function appendMovieList(products) {
   let htmlTemplate = "";
   for (let product of products) {
@@ -348,19 +349,22 @@ function appendMovieList(products) {
   document.querySelector("#grid-products").innerHTML = htmlTemplate;
 }
 
+// This is to hide the searched movies, once you have clicked the one you were looking for
+// This gets
 function hideMovieSearch() {
   document.querySelector("#grid-products").innerHTML = "";
 
 }
 
 
-// As before it fetches from the api.
+// As before, it fetches from the api by taking the value from apisearch2(search.this) in the html.
 function apisearch2(value) {
   console.log(value);
 
   let url = "http://www.omdbapi.com/?apikey=196312ed&t=" + value;
   console.log(url);
 
+// Fetching from the url above, wainting for a response and then calls the funcion "appendMovieInfo"
   fetch(url)
     .then(function(response) {
       return response.json();
@@ -381,7 +385,7 @@ function appendMovieInfo(MovieInfo) {
 
 }
 
-/* Feed and firestore database for feed */
+/* Feed and firestore database for feed - ian */
 const movieFeedRef = db.collection("movieFeedStorage");
 let moviesFeed = [];
 
@@ -418,7 +422,7 @@ function createMovieFeed() {
   let movieImg = document.querySelector('#movieImg').value;
 
 
-  // create a new object
+  // create a new object with the values of above ^
   let newmoviefeed = {
     personName: personName,
     movieName: movieName,
@@ -427,7 +431,7 @@ function createMovieFeed() {
     movieImg: movieImg
   };
 
-  // push the new object to the array
+  // Add the new object to the array
   movieFeedRef.add(newmoviefeed);
   // To reset the "yourRating" input field
   document.querySelector("#yourRating").value = "";
