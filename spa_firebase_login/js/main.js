@@ -153,13 +153,6 @@ function createMovie() {
   let movieImgInput = document.querySelector('#movieImg');
   document.querySelector("#apiSearchResults").value = "";
 
-  /*
-    let nameInput = document.querySelector('#name');
-    let mailInput = document.querySelector('#mail');
-    let kønInput = document.querySelector('#køn');
-    let alderInput = document.querySelector('#alder');
-    let picInput = document.querySelector('#pic');
-    */
 
   let newMovie = {
     yourRating: yourRatingInput.value,
@@ -344,7 +337,6 @@ function appendMovieList(products) {
       </a>
     </section>
     `;
-
   }
   document.querySelector("#grid-products").innerHTML = htmlTemplate;
 }
@@ -395,6 +387,7 @@ movieFeedRef.onSnapshot(function(snapshotData) {
   appendMoviesFeed(moviesFeed);
 });
 
+// This function takes data from Firebases Realtime Database and loops through and append them all to the DOM.
 function appendMoviesFeed(moviesFeed) {
   let htmlTemplate = "";
   for (let movieFeed of moviesFeed) {
@@ -415,6 +408,7 @@ function appendMoviesFeed(moviesFeed) {
 
 function createMovieFeed() {
   // get the values from the input fields
+  // Extra note: "${currentUser.displayName}" refers to the name of the person currently logged in.
   let personName = `${currentUser.displayName}`;
   let yourRating = document.querySelector('#yourRating').value;
   let movieName = document.querySelector('#movieName').value;
